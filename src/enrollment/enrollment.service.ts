@@ -25,7 +25,7 @@ export class EnrollmentService {
     private courseService: CoursesService,
   ) {}
 
-  async create(createEnrollmentDto: CreateEnrollmentDto) {
+  async create(id: string, createEnrollmentDto: CreateEnrollmentDto) {
     if (createEnrollmentDto.extraInformations) {
       if (
         createEnrollmentDto.extraInformations.length !==
@@ -38,6 +38,7 @@ export class EnrollmentService {
     }
     const { extraInformations, ...others } = createEnrollmentDto;
     const enrollmentToSave = {
+      user: +id,
       extraInformations: convertJsonToString(extraInformations),
       ...others,
     };
@@ -47,6 +48,7 @@ export class EnrollmentService {
     if (course.placesAvailable < createEnrollmentDto.size) {
       throw new BadRequestException('no places available, sorry');
     }
+
     return await this.enrollmentRepository.save(enrollmentToSave);
     // return await this.enrollmentRepository.save(createEnrollmentDto);
   }

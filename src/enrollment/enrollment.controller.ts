@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { CreateEnrollmentDto } from './dto/create-enrollment.dto';
@@ -14,16 +16,23 @@ import { UpdateEnrollmentDto } from './dto/update-enrollment.dto';
 import { Enrollment } from './entities/enrollment.entity';
 import { findInstanceDto } from 'src/shared/find-instance.dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('enrollment')
 export class EnrollmentController {
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
+    @Request() req,
     @Body() createEnrollmentDto: CreateEnrollmentDto,
   ): Promise<Enrollment> {
-    return await this.enrollmentService.create(createEnrollmentDto);
+    return await this.enrollmentService.create(
+      req.user.authId,
+      createEnrollmentDto,
+    );
   }
 
   @Get()
