@@ -1,10 +1,8 @@
-import { PartialType } from "@nestjs/mapped-types";
-import { CreateCourseDto } from "./create-course.dto";
 import { IsIn, IsInt, IsNumber, IsOptional, IsPositive, IsString } from "class-validator";
 import { Type } from "class-transformer";
 
 
-export class FindCourseDto  {
+export class findInstanceDto  {
   
 @IsOptional()
   @IsIn(['ASC', 'DESC'])

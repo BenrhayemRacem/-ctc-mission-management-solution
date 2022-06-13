@@ -10,6 +10,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { RolesEnum } from '../enums/roles.enum';
+import { Match } from "../decorators/match.decorator";
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -37,4 +38,12 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(8)
   password: string;
+
+  @IsNotEmpty()
+  @MinLength(8)
+  @Match('password')
+  repeat_password: string;
+
+  @IsOptional()
+  profileImage:string;
 }

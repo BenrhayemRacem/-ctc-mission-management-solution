@@ -17,10 +17,7 @@ import { FindOrganismDto } from './dto/find-organism.dto';
 export class OrganismController {
   constructor(private readonly organismService: OrganismService) {}
 
-  @Post()
-  addOrganism(@Body() createOrganismDto: CreateOrganismDto) {
-    return this.organismService.create(createOrganismDto);
-  }
+
   @Get()
   findAll(@Query() findOptions: FindOrganismDto) {
     return this.organismService.findAllSortedAndPaginated(findOptions);

@@ -7,21 +7,26 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { UpdateResult } from 'typeorm';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto, UpdateUserDtoAll } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 import { FindUserDto } from './dto/find-user.dto';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Get('/:id')
-  getUser(@Param('id') id: number): Promise<User> {
-    return this.userService.getOneUser(id);
+  @UseGuards(JwtAuthGuard)
+  @Get('/one/:id?')
+  getUser(@Request() req, @Param('id') id: number): Promise<User> {
+    const searchId = id ? id : req.user.authId;
+    return this.userService.getOneUser(searchId);
   }
 
   @Get()
@@ -29,12 +34,23 @@ export class UserController {
     return this.userService.getAllUsersSortedAndPaginated(findOptions);
   }
 
-  @Patch('/:id')
+  @Patch('/:id?')
+  @UseGuards(JwtAuthGuard)
   updateUser(
+    @Request() req,
     @Param('id') id: number,
-    @Body() updateUserDto: UpdateUserDto,
+    @Body() updateUserDto: UpdateUserDtoAll,
   ): Promise<User> {
-    return this.userService.updateUser(id, updateUserDto);
+    const searchId = id ? id : req.user.authId;
+    return this.userService.updateUser(searchId, updateUserDto);
+    // return this.userService.updateUser(id, updateUserDto);
+  }
+  @Patch('/password/:id')
+  updateUserPassword(
+    @Param('id') id: number,
+    @Body() updateUserPasswordDto: UpdateUserPasswordDto,
+  ): Promise<User> {
+    return this.userService.updateUserPassword(id, updateUserPasswordDto);
   }
 
   @Delete('/:id')

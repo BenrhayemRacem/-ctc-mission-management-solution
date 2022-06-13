@@ -1,11 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NotFoundError } from 'rxjs';
 import { Repository } from 'typeorm';
 import { CreateOrganismDto } from './dto/create-organism.dto';
 import { UpdateOrganismDto } from './dto/update-organism.dto';
 import { Organism } from './entities/organism.entity';
 import { FindOrganismDto } from './dto/find-organism.dto';
+import { AuthService } from '../auth/auth.service';
+import { SaveOrganismDto } from './dto/save-organism.dto';
 
 @Injectable()
 export class OrganismService {
@@ -14,8 +20,8 @@ export class OrganismService {
     private organismRepository: Repository<Organism>,
   ) {}
 
-  async create(createOrganismDto: CreateOrganismDto) {
-    return this.organismRepository.save(createOrganismDto);
+  async create(saveOrganismDto: SaveOrganismDto) {
+    return this.organismRepository.save(saveOrganismDto);
   }
 
   async findAll() {
@@ -35,7 +41,8 @@ export class OrganismService {
     queryBuilder
       .orderBy(`organism.${orderBy}`, sort)
       .offset((page - 1) * perPage)
-      .limit(perPage);
+      .limit(perPage)
+      .leftJoinAndSelect('organism.contactPerson', 'contactPerson');
     const total = await queryBuilder.getCount();
     return {
       data: await queryBuilder.getMany(),
@@ -46,7 +53,7 @@ export class OrganismService {
   }
 
   async findOne(id: number) {
-    return this.organismRepository.findOne(id);
+    return this.organismRepository.findOne({ where: { id } });
   }
 
   async update(id: number, updateOrganismDto: UpdateOrganismDto) {

@@ -8,12 +8,12 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
+import { findInstanceDto } from 'src/shared/find-instance.dto';
 import { DeepPartial, DeleteResult, UpdateResult } from 'typeorm';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
-import { FindCourseDto } from './dto/find-course.dto';
 
 @Controller('courses')
 export class CoursesController {
@@ -39,7 +39,7 @@ export class CoursesController {
   }
 
   @Get()
-  async findAll(@Query() findOptions: FindCourseDto) {
+  async findAll(@Query() findOptions: findInstanceDto) {
     return await this.coursesService.findAllSortedAndPaginated(findOptions);
   }
 

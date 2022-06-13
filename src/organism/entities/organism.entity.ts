@@ -7,9 +7,10 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { OrganismNautreEnum } from '../enums/organism-nature.enum';
+import { Timestamp } from 'src/generics/timestamp.entity';
 
 @Entity()
-export class Organism {
+export class Organism  extends  Timestamp{
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -53,7 +54,6 @@ export class Organism {
 
   @OneToOne(() => User, (user) => user.organism, {
     eager: true,
-    cascade : ["insert"]
   })
   @JoinColumn()
   contactPerson: User;

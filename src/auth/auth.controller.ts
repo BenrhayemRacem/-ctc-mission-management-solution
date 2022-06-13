@@ -13,8 +13,10 @@ export class AuthController {
     return this.authService.signup(createUserDto);
   }
 
-  @Post('singin')
-  singin(signinDto: SigninDto): any {}
+  @Post('signin')
+  singin( @Body()signinDto: SigninDto): any {
+    return this.authService.signin(signinDto)
+  }
 
   @Post('/organism/signup')
   organismSignup(@Body() createOrganismDto: CreateOrganismDto) {

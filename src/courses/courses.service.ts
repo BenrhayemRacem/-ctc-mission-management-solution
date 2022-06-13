@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { findInstanceDto } from 'src/shared/find-instance.dto';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
-import { FindCourseDto } from './dto/find-course.dto';
 
 @Injectable()
 export class CoursesService {
@@ -30,21 +30,22 @@ export class CoursesService {
       skip: offset,
     });
   }
-  async findAllSortedAndPaginated(findOptions: FindCourseDto) {
+  async findAllSortedAndPaginated(findOptions: findInstanceDto) {
     const queryBuilder = this.courseRepository.createQueryBuilder('course');
     const orderBy = findOptions.orderBy ? findOptions.orderBy : 'createdAt';
     const sort = findOptions.sort
       ? findOptions.sort === 'ASC'
         ? 'ASC'
         : 'DESC'
-      : 'ASC';
+      : 'DESC';
     const page = findOptions.page ? findOptions.page : 1;
     const perPage = findOptions.perPage ? findOptions.perPage : 10;
 
     queryBuilder
       .orderBy(`course.${orderBy}`, sort)
       .offset((page - 1) * perPage)
-      .limit(perPage);
+      .limit(perPage)
+     // .leftJoinAndSelect('course.enrollments', 'enrollments');
     const total = await queryBuilder.getCount();
     return {
       data: await queryBuilder.getMany(),
@@ -55,7 +56,10 @@ export class CoursesService {
   }
 
   async findOne(id: number): Promise<Course> {
-    const courseExists = await this.courseRepository.findOne({ id });
+    const courseExists = await this.courseRepository.findOne({
+      where: { id },
+      relations: ['enrollments'],
+    });
     if (courseExists) {
       return courseExists;
     }

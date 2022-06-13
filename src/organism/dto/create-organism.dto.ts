@@ -46,8 +46,7 @@ export class CreateOrganismDto {
   @IsOptional()
   trainingNeeds: string;
 
-  @Type(() => CreateUserDto)
-  @ValidateNested()
-  //@IsNumber()
-  contactPerson: User;
+
+  @IsNotEmpty()
+  contactPerson: CreateUserDto;
 }

@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -6,18 +7,24 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto, UpdateUserDtoAll } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { FindUserDto } from './dto/find-user.dto';
+import * as bcrypt from 'bcrypt';
+import { hashPassword } from 'src/shared/hash-password';
+import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
+import { MailService } from '../mail/mail.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private mailService: MailService,
   ) {}
 
   async getOneUser(id: number): Promise<User> {
-    const user = await this.userRepository.findOne(id);
+    const user = await this.userRepository.findOne({ where: { id }  ,relations:['instructor','instructor.courses' ,'enrolled']});
     if (user) {
       return user;
     }
@@ -25,7 +32,7 @@ export class UserService {
   }
 
   async getUserByEmail(email: string): Promise<User> {
-    return await this.userRepository.findOne({ email });
+    return await this.userRepository.findOne({ where: { email } });
   }
 
   async getAllUsers(): Promise<User[]> {
@@ -38,7 +45,7 @@ export class UserService {
       ? findOptions.sort === 'ASC'
         ? 'ASC'
         : 'DESC'
-      : 'ASC';
+      : 'DESC';
     const page = findOptions.page ? findOptions.page : 1;
     const perPage = findOptions.perPage ? findOptions.perPage : 10;
 
@@ -73,18 +80,59 @@ export class UserService {
         errorMsgs['phoneNumber'] = 'Phone number already used';
       throw new ConflictException(errorMsgs);
     }
-
-    const result = await this.userRepository.save(createUserDto);
+    const { repeat_password, ...userToSave } = createUserDto;
+    const result = await this.userRepository.save(userToSave);
     delete result.password;
+    this.mailService.sendUserCreateAccount(
+      createUserDto.firstName,
+      createUserDto.lastName,
+      createUserDto.email,
+    );
     return result;
   }
 
-  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+  async updateUser(id: number, updateUserDto: UpdateUserDtoAll): Promise<User> {
+    // const user = await this.userRepository.findOne(id);
     const user = await this.userRepository.preload({ id, ...updateUserDto });
-    if (user) {
-      return this.userRepository.save(user);
+    if (!user) {
+      throw new NotFoundException(`user with id ${id} does not exist`);
     }
-    throw new NotFoundException(`user with id ${id} does not exist.`);
+    return await this.userRepository.save(user)
+    /* if (updateUserDto.password) {
+      updateUserDto.password = await hashPassword(updateUserDto.password);
+    }
+
+    */
+
+  }
+
+  async updateUserPassword(
+    id: number,
+    updateUserPasswordDto: UpdateUserPasswordDto,
+  ): Promise<User> {
+    const user = await this.userRepository.findOne(id);
+    if (!user) {
+      throw new NotFoundException(`user with id ${id} does not exist`);
+    }
+    const isEqualPassword = await bcrypt.compare(
+      updateUserPasswordDto.old_password,
+      user.password,
+    );
+    if (!isEqualPassword) {
+      throw new BadRequestException(`Passwords do not match`);
+    }
+    const newHashedPassword = await hashPassword(
+      updateUserPasswordDto.password,
+    );
+    const updatedUser = { ...user, password: newHashedPassword };
+    try {
+      const result = await this.userRepository.save(updatedUser);
+      delete result.password;
+      delete result.deletedAt;
+      return result;
+    } catch (err) {
+      throw new ConflictException(err.toString());
+    }
   }
 
   async softDelete(id: number): Promise<UpdateResult> {

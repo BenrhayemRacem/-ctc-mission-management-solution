@@ -9,6 +9,8 @@ import {
 } from 'class-validator';
 import { dummyInstructor } from '../entities/dummyInstructor.entity';
 import { dummyManager } from '../entities/dummyManger.entity';
+import { Instructor } from '../../instructor/entities/instructor.entity';
+import { User } from '../../user/entities/user.entity';
 
 export class CreateCourseDto {
   @IsNotEmpty()
@@ -25,7 +27,7 @@ export class CreateCourseDto {
   @IsNotEmpty()
   @Type(() => Number)
   @IsNumber()
-  instructedBy: dummyInstructor;
+  instructedBy: Instructor;
   @IsNotEmpty()
   description: string;
   @IsNotEmpty()
@@ -41,5 +43,14 @@ export class CreateCourseDto {
   @IsNotEmpty()
   @Type(() => Number)
   @IsNumber()
-  plannedBy: dummyManager;
+  plannedBy: User;
+  @IsNotEmpty()
+  @Type(() => Number)
+  @IsInt()
+  @IsPositive()
+  placesAvailable: number;
+  @IsNotEmpty()
+  preview: string;
+  @IsNotEmpty()
+  mainImage:string;
 }
