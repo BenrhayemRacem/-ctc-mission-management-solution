@@ -5,19 +5,26 @@
   </div>
   <div class="calendar-container" *ngIf="isCalendarViewContext">
     <div class="card mt-5 mx-5">
-      <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+      <full-calendar #calendar [options]="calendarOptions" ></full-calendar>
     </div>
-    <button class="button mt-2 ms-5" (click)="handleAddClick()">
-      Ajouter formation
-    </button>
-    <button class="button mt-2 ms-1">supprimer formation</button>
+    <div *ngIf="isAdmin">
+
+      <button class="button mt-2 ms-5" (click)="handleAddClick()">
+        Ajouter formation
+      </button>
+      <button class="button mt-2 ms-1">supprimer formation</button>
+    </div>
   </div>
   <div class="card-container" *ngIf="!isCalendarViewContext">
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+    <div class="card-container" *ngFor=" let course of coursesList">
+      <app-enrolled-courses [description]="course.preview"
+                            [endDate]="course.endDate"
+                            [startDate]="course.startDate"
+                            [name]="course.name"
+                            [image]="course.mainImage"
+                            [id]="course.id"
+      ></app-enrolled-courses>
+    </div>
+
   </div>
 </div>

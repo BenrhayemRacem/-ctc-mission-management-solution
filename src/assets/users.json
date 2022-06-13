@@ -1,0 +1,37 @@
+[{
+        "id": 1,
+        "firstName": "mazen",
+        "lastName": "issaoui",
+        "email": "issaoui@gmail.com",
+        "telephone": "516151",
+        "cin": "841851",
+        "password": "ebfig"
+    },
+    {
+        "id": 2,
+        "firstName": "racem",
+        "lastName": "issaoui",
+        "email": "issaoui@gmail.com",
+        "telephone": "516151",
+        "cin": "841851",
+        "password": "ebfig"
+    },
+    {
+        "id": 3,
+        "firstName": "ahmed",
+        "lastName": "issaoui",
+        "email": "issaoui@gmail.com",
+        "telephone": "516151",
+        "cin": "841851",
+        "password": "ebfig"
+    },
+    {
+        "id": 4,
+        "firstName": "mohamed",
+        "lastName": "issaoui",
+        "email": "issaoui@gmail.com",
+        "telephone": "516151",
+        "cin": "841851",
+        "password": "ebfig"
+    }
+]

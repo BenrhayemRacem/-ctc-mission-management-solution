@@ -6,12 +6,12 @@
         nzSrc="/assets/Images/medsirat.png"
         alt=""
         class="logo"
-        /> 
-    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">  
+        />
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
         <div class="login-form__header"><h1>Login</h1>
         Please fill the form to log into your account
     </div>
-    
+    <nz-alert *ngIf="errorMessage.length>0" nzType="error" nzMessage="{{errorMessage}}"></nz-alert>
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input your Email!">
             <nz-input-group nzPrefixIcon="user">
@@ -27,17 +27,17 @@
           </nz-form-control>
         </nz-form-item>
         <div nz-row class="login-form-margin">
-          
+
           <div nz-col >
             <a class="login-form-forgot">Forgot password</a>
           </div>
         </div>
         <br>
-        <app-button [text]="textl"></app-button> 
+        <app-button [text]="textl"></app-button>
       <br>
         <div class="login-form_bottom">
         Don't have an account ?
-        <a>Sign up here</a>
+        <a href="/pre-signup">Sign up here</a>
     </div>
       </form>
     </div>

@@ -1,0 +1,314 @@
+.card-container {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  padding: 20px;
+  padding-top: 100px;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  * {
+    flex: 0 0 30%;
+  }
+}
+
+
+.bg {
+  background-color: rgba(255, 255, 255, 0.375);
+}
+.arrowButton {
+  margin-right: 10px;
+  color: #ffae00;
+  font-size: 3rem;
+  font-weight: bolder;
+}
+.arrowButton:hover{
+  cursor: pointer;
+}
+.back {
+  width: 100%;
+  position: relative;
+
+  display: flex;
+  text-align: left;
+  align-items: center;
+}
+.backText{
+  font-family: "Lucida Handwriting", Times, Cursive;
+  font-size: 2.2rem; font-weight: 600; color: #ffae00;
+  margin-bottom: 20%;
+}
+.container {
+  display: flex;
+  justify-content: center;
+
+}
+.leftSide {
+  position: relative;
+  align-items: center;
+  //margin-top: 5%;
+
+  width: 30%;
+}
+.principaleInfos {
+  margin-top: 25%;
+  align-items: center;
+  text-align: center;
+}
+.profileImage{
+  display: block;
+  margin-left: 10%;
+width: 80%;
+height: 80%;
+object-fit: cover;
+border-radius: 50%;
+}
+.name {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-weight: 500;
+
+  text-shadow:0 0 3px rgba(24, 23, 23, 0.274);
+}
+.job {
+  margin-top: 10px;
+  font-size: 1.2;
+  color: #333333;
+  font-weight: 400;
+}
+.titlesList {
+  padding-left: 20%;
+  margin-top: 15%;
+}
+.pageTitle {
+  margin-top: 12px;
+  margin-left: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #807e7e;
+}
+.pageTitle:hover{
+  color: rgba(0, 0, 0, 0.788);
+  cursor: pointer;
+}
+.rightSide{
+  width: 70%;
+  position: relative;
+  align-items: center;
+}
+.icons{
+  width: 100%;
+  margin-top: 20%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 10%;
+  margin-bottom: 35px;
+}
+.iCont{
+  position: absolute;
+  right: 0;
+  display: flex;
+
+}
+// .iconContainer{
+//   border-radius: 50%;
+//   background-color: white;
+//   align-items: center;
+//   height: 80px;
+//   width: 80px;
+//   padding: 2px;
+// }
+.iconContainer i{
+  background-color: white;
+  border-radius: 50%;
+  font-size: 30px;
+  padding: 10px;
+  box-shadow: 0 3px 3px rgba(14, 13, 13, 0.438);
+  margin-right: 10px;
+}
+.personalInfo {
+
+  width: 100%;
+  margin-top: 2%;
+  position: relative;
+  margin-left: 10%;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.274);
+}
+.login-form{
+  padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.formTitle{
+  color: #807e7e;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+.nameAndLastName{
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.fieldInput{
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5%;
+}
+.leftFieldInput{
+  width: 50%;
+  padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 5%;
+    display: flex;
+    flex-direction: column;
+}
+.rightFieldInput{
+  width: 50%;
+  padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5%;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+}
+.fieldName{
+  font-weight: 600;
+}
+.container a {
+  color: #ffae00;
+}
+
+.login-form__header {
+  margin-bottom: 15px;
+  position: relative;
+  color: #333333;
+}
+
+.login-form_bottom {
+  text-align: center;
+}
+
+.login-form-margin {
+  margin-bottom: 10px;
+}
+.inputText::placeholder{
+  color: black;
+  font-weight: 400;
+  font-size: 1rem;
+}
+.datePicker{
+  width: 100%;
+}
+.securityInfo {
+
+  width: 100%;
+  margin-top: 5%;
+  position: relative;
+  margin-left: 10%;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.274);
+  margin-bottom: 10%;
+}
+.login-form-button {
+  box-shadow: 0 0 4px #ffae0075;
+  border-radius: 20px;
+  margin-top: -20px;
+  background-color:#ffae00;
+  border-color: #ffae00;
+}
+.updateButtonContainer{
+  align-items: center;
+  text-align: center;
+}
+.updateButton{
+  box-shadow: 0 0 4px #ffae0075;
+  border-radius: 20px;
+  width: 30%;
+  background-color:#ffae00;
+  border-color: #ffae00;
+}
+
+.titleContainer{
+  font-size: 3rem;
+  font-weight: 600;
+  color: #ffae00;
+  text-align: center;
+  border-bottom: 3px solid #0c0449;
+  padding-bottom: 20px;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 5%;
+}
+
+@media (max-width: 900px) {
+  .fieldInput{
+    margin-bottom: 10%;
+  }
+  .arrowButton {
+    font-size: 2rem;
+    font-weight: bolder;
+  }
+
+  .backText{
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 400px) {
+
+  .arrowButton {
+    font-size: 1.7rem;
+    font-weight: bolder;
+  }
+
+  .backText{
+    font-size: 1rem;
+  }
+
+  .leftSide {
+    position: relative;
+    align-items: center;
+    margin-top: 5%;
+
+    width: 100%;
+  }
+  .profileImage{
+    width: 70%;
+    height: 70%;
+    margin: 15%;
+  }
+  .rightSide{
+    width: 90%;
+    position: relative;
+
+  }
+  .container{
+    flex-direction: column;
+
+    width: 100%;
+  }
+  .titlesList {
+    width: 100%;
+    padding-left: 0;
+    display: flex;
+    margin-top: 15%;
+    align-items: center;
+    text-align: center;
+  }
+  .pageTitle {
+    width: 33%;
+    margin-top: 12px;
+    margin-left: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #807e7e;
+  }
+
+}

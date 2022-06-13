@@ -25,6 +25,7 @@ export class SignupOrganismComponent implements OnInit {
         phoneNumber : this.validateForm.value.phoneNumber,
         cin : this.validateForm.value.cin,
         password : this.validateForm.value.password,
+        repeat_password : this.validateForm.value.cpassword,
         role : "organism-contact"
 
       }
@@ -39,6 +40,7 @@ export class SignupOrganismComponent implements OnInit {
         trainingNeeds : this.validateForm.value.trainingNeeds,
         contactPerson
       }
+      console.log(organism)
       this.http.post('http://localhost:3000/auth/organism/signup',organism).subscribe(
         responseData=>{console.log(responseData);}
       );

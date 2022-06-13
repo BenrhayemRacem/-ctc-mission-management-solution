@@ -1,0 +1,41 @@
+<div class="bg">
+  <div class="container">
+    <img nz-image width="200px" height="100px" nzSrc="/assets/Images/medsirat.png" alt="" class="logo" />
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+
+      <div class="login-form__header">
+        <h1>Signup</h1>
+        Choose your status
+      </div>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your status!">
+          <nz-select
+            id="nature"
+            formControlName="status"
+            nzPlaceHolder="status">
+            <nz-option nzValue="individual" nzLabel="simple user"></nz-option>
+            <nz-option nzValue="organism" nzLabel="organism"></nz-option>
+            <nz-option nzValue="instructor" nzLabel="instructor"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <div nz-row class="login-form-margin"></div>
+      <br>
+      <app-button [text]="textl"></app-button>
+      <br>
+      <div *ngIf="successMessage">
+        <nz-alert nzType="success" nzMessage="Sign Up successfully completed"></nz-alert>
+      </div>
+      <div *ngIf="errorMessage">
+        <div *ngFor="let e of errorMessage">
+          <nz-alert nzType="error" nzMessage="{{e}}"></nz-alert>
+        </div>
+      </div>
+      <div class="login-form_bottom">
+        already have an account ?
+        <a routerLink="/login">log in here</a>
+      </div>
+    </form>
+  </div>
+</div>

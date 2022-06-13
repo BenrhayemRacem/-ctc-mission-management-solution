@@ -1,0 +1,65 @@
+<div class="bg">
+  <button
+    nz-button
+    nzType="primary"
+    class="backButton"
+    *ngIf="isShowUser"
+    (click)="doNotShowUserDetails()"
+  >
+    Go Back
+  </button>
+  <a nz-button class="addButton" nzType="primary" *ngIf="!isShowUser" href="/signup-user">
+    Add user
+  </a>
+  <br />
+  <br />
+  <nz-table #editRowTable nzBordered [nzData]="listOfData" *ngIf="!isShowUser">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>phone number</th>
+        <th nzWidth="15%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+        <td>{{ data.firstName }}</td>
+        <td>{{ data.lastName }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.phoneNumber }}</td>
+        <td>
+          <a nz-button class="infoButton" nzType="link"
+            ><i
+              nz-icon
+              nzType="info-circle"
+              nzTheme="outline"
+              (click)="showUserInfos(data.id)"
+            ></i
+          ></a>
+          <a
+            nz-button
+            nzType="link"
+            nz-popconfirm
+            nzPopconfirmTitle="Sure to delete?"
+            class="deleteButton"
+            ><i
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+              (nzOnConfirm)="deleteRow(data.id)"
+            ></i
+          ></a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-layout *ngIf="isShowUser">
+    <app-profile-update
+      [adminContext]="adminContext"
+      [userId]="showUserDetails"
+    ></app-profile-update>
+  </nz-layout>
+</div>

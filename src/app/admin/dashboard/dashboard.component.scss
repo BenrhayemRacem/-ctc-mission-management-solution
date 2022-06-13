@@ -1,0 +1,62 @@
+img {
+    height: 30%;
+    width: 50%;
+    margin-top: 20%;
+    margin-left: 20%;
+    margin-bottom: 20%;
+}
+.sider{
+    background: linear-gradient(to right,black, #0c0449);
+
+}
+.menu{
+    background: linear-gradient(to right,black, #0c0449);
+}
+[nz-button] {
+    margin-left: 4%;
+    margin-bottom: 12px;
+}
+
+ul {
+    margin-top: 20%;
+    li {
+        margin: 8%;
+        font-size: larger;
+        font-weight: 600;
+        i{
+            color: white;
+            font-size: larger;
+        }
+    }
+}
+
+nz-header {
+    background: #fff;
+    padding: 0;
+}
+
+nz-content {
+    //margin: 10% 16px;
+    //margin-top: 7%;
+    width: 100%;
+    //padding: 20px;
+
+}
+
+nz-layout {
+    min-height: 100%;
+}
+
+nz-breadcrumb {
+    margin: 16px 0;
+}
+
+.inner-content {
+    padding: 24px;
+    background: #fff;
+    min-height: 360px;
+}
+
+nz-footer {
+    text-align: center;
+}

@@ -1,0 +1,67 @@
+<nz-layout>
+    <nz-sider nzCollapsible nzWidth="250px" class="sider">
+        <div class="logo">
+            <img src="/assets/Images/medsirat.png" alt="medsirat logo">
+        </div>
+        <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
+
+            <li nz-menu-item (click)="swapView(0)">
+                <i nz-icon nzType="user"></i>
+                <span>Profile</span>
+            </li>
+            <li nz-menu-item (click)="swapView(1)">
+                <i nz-icon nzType="calendar"></i>
+                <span>Planning</span>
+            </li>
+            <li nz-menu-item (click)="swapView(2)">
+                <i nz-icon nzType="form"></i>
+                <span>Enrolled Courses</span>
+            </li>
+
+            <li nz-menu-item style="margin-top:50%" (click)="logout()">
+                <i nz-icon nzType="logout"></i>
+                <span>Log out</span>
+            </li>
+        </ul>
+
+    </nz-sider>
+
+    <nz-layout *ngIf="index==2">
+        <div class="container" >
+            <div class="titleContainer">
+                Enrolled courses
+
+            </div>
+          <div *ngIf="authUser.enrolled.length>0">
+            <div class="card-container"  >
+              <div *ngFor="let enroll of authUser.enrolled">
+
+              <app-enrolled-courses [description]=" 'inscription state : \t' +enroll.state"
+                                    [endDate]="enroll.course.endDate"
+                                    [startDate]="enroll.course.startDate"
+                                    [name]="enroll.course.name"
+                                    [image]="enroll.course.mainImage"
+                                    [id]="enroll.course.id"
+                                    enrollContext="true"
+                                    inscriptionText="désinscrire"
+                                    [enrollmentId]="enroll.id"
+
+              ></app-enrolled-courses>
+            </div>
+
+            </div>
+          </div>
+        </div>
+    </nz-layout>
+  <nz-layout *ngIf="index==0">
+        <div class="profileContainer" >
+            <app-profile-update></app-profile-update>
+        </div>
+  </nz-layout>
+  <nz-layout *ngIf="index==1">
+    <div class="profileContainer" >
+      <app-planning></app-planning>
+    </div>
+  </nz-layout>
+</nz-layout>
+

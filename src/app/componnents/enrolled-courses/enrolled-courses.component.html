@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="cardImage">
+    <img src="https://drive.google.com/uc?export=view&id={{image}}" alt="medsirat logo" class="image" />
+  </div>
+  <h1 class="title"> {{name}}</h1>
+  <h3 class="date">{{startDateFormat}} - {{endDateFormat}}</h3>
+
+  <p class="paragraph">
+    {{description.substring(0,50)}}...
+  </p>
+  <div class="button-container" *ngIf="enrollContext==='false'">
+    <div class="button primary">{{inscriptionText}}</div>
+    <a href="/course-details/{{id}}" class="button secondary">Plus de details</a>
+
+  </div>
+  <div class="button-container" *ngIf="enrollContext==='true'">
+    <div class="button primary">{{inscriptionText}}</div>
+    <a href="/enroll-details/{{id}}/{{enrollmentId}}" class="button secondary">Plus de details</a>
+  </div>
+</div>

@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular'; // useful for typechecking
 import * as arg from 'arg';
 import { event } from 'src/app/models/event.model';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import {ICourses} from "./courseInetrface";
+import {map} from "rxjs/operators";
+import {PlanningService} from "./planning.service";
 @Component({
   selector: 'app-planning',
   templateUrl: './planning.component.html',
@@ -12,9 +15,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 export class PlanningComponent implements OnInit {
   @ViewChild('calendar', { static: true }) calendar!: FullCalendarComponent;
   isCalendarViewContext: boolean;
+  coursesList : ICourses[] = []
  // events:
-
+isAdmin=false;
   calendarOptions: CalendarOptions = {
+    height:700,
     headerToolbar: { center: 'dayGridMonth,timeGridWeek,timeGridDay' },
     plugins : [timeGridPlugin],
     initialView: 'dayGridMonth',
@@ -22,11 +27,29 @@ export class PlanningComponent implements OnInit {
     events: "http://localhost:3000/courses/calendar/event",
   };
 
-  constructor() {
+  constructor( private planningService:PlanningService) {
     this.isCalendarViewContext = true;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.planningService.getCourses().pipe(map(
+      (responseData)=>{
+        console.log(responseData)
+        return responseData.data;
+      }
+    )).subscribe(
+      (user)=>{console.log(user);
+        this.coursesList=(user);
+        console.log(this.coursesList);
+      }
+    );
+    const role = localStorage.getItem("ctc_mission_auth_role")
+    if(role && role==="admin") {
+      this.isAdmin=true
+    }else {
+      this.isAdmin=false
+    }
+  }
 
   handleEventClick(arg: any) {
     arg.jsEvent.preventDefault(); // don't let the browser navigate

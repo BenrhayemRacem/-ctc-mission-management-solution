@@ -1,0 +1,89 @@
+
+.sider{
+    background: linear-gradient(to right,black, #0c0449);
+
+}
+.menu{
+    background: linear-gradient(to right,black, #0c0449);
+}
+
+img {
+    height: 30%;
+    width: 50%;
+    margin-top: 20%;
+    margin-left: 20%;
+    margin-bottom: 20%;
+}
+
+[nz-button] {
+    margin-left: 4%;
+    margin-bottom: 12px;
+}
+
+ul {
+    margin-top: 20%;
+    li {
+        margin: 8%;
+        font-size: larger;
+        font-weight: 600;
+        i{
+            color: #ffae00;
+            font-size: larger;
+        }
+    }
+}
+
+nz-header {
+    background: #fff;
+    padding: 0;
+}
+
+nz-content {
+    margin: 10% 16px;
+}
+
+nz-layout {
+    min-height: 100%;
+}
+
+nz-breadcrumb {
+    margin: 16px 0;
+}
+
+.inner-content {
+    padding: 24px;
+    background: #fff;
+    min-height: 360px;
+}
+
+nz-footer {
+    text-align: center;
+}
+.card-container {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    padding: 20px;
+    padding-top: 100px;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    * {
+      flex: 0 0 30%;
+    }
+  }
+  .container{
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    padding-top: 100px;
+    justify-content: center;
+  }
+  .titleContainer{
+      font-size: 3rem;
+      font-weight: 600;
+      color: #ffae00;
+      text-align: center;
+      border-bottom: 3px solid #0c0449;
+      padding-bottom: 20px;
+  }

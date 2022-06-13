@@ -1,0 +1,89 @@
+.bg {
+  background-color: rgb(216, 216, 216);
+}
+.container {
+  display: grid;
+  justify-content: center;
+  grid-gap: 4rem;
+  padding: 0 2rem;
+}
+.logo {
+  margin-top: 70px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+.login-form {
+  width: 100%;
+  padding-top: 10%;
+  padding-bottom: 30px;
+  padding-left: 100px;
+  padding-right: 100px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border-radius: 0.75rem;
+}
+.cv {
+  margin-top: 10%;
+}
+.container a {
+  color: #ffae00;
+}
+
+.login-form__header {
+  margin-bottom: 15px;
+  position: relative;
+  color: #333333;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #fff;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 4px;
+  padding: 0.75em 0.75em 0 0.75em;
+  border: 1px solid #ffae00;
+}
+.example-chip-list {
+  width: 100%;
+}
+.chip-item {
+  color: #ffae00;
+  background-color: #ffae001a;
+  box-shadow: #333333;
+}
+
+.login-form_bottom {
+  text-align: center;
+}
+
+.login-form-margin {
+  margin-bottom: 14px;
+}
+
+.example-form-field {
+  margin: 0 8px 16px 0;
+}
+.availibility {
+  margin-top: 5px;
+}
+nz-range-picker {
+  width: 100%;
+}
+.matLabel {
+  color: rgba(0, 0, 0, 0.493);
+}
+
+.cvinput {
+  color: #f1a602;
+  margin-top: 3px;
+  cursor: pointer;
+}
+@media (max-width: 495px) {
+  .login-form {
+    margin-top: -35px;
+  }
+}

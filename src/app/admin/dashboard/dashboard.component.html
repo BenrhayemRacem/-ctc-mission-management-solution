@@ -1,0 +1,66 @@
+<nz-layout>
+    <nz-sider nzCollapsible nzWidth="250px" class="sider">
+        <div class="logo">
+            <img src="/assets/Images/logo.png" alt="medsirat logo">
+        </div>
+        <ul nz-menu nzTheme="dark" nzMode="inline" class="menu">
+            <li nz-menu-item >
+                <i nz-icon nzType="dashboard"></i>
+                <span>Dashboard </span>
+            </li>
+            <li nz-menu-item (click)="handleElementToShow(0)">
+                <i nz-icon nzType="user"></i>
+                <span>Admin profile</span>
+            </li>
+            <li nz-menu-item (click)="handleElementToShow(2)">
+                <i nz-icon nzType="user"></i>
+                <span>Users</span>
+            </li>
+            <li nz-menu-item (click)="handleElementToShow(3)">
+                <i nz-icon nzType="user"></i>
+                <span>Instructors</span>
+            </li>
+            <li nz-menu-item (click)="handleElementToShow(4)">
+                <i nz-icon nzType="team"></i>
+                <span>Organisms</span>
+            </li>
+            <li nz-menu-item (click)="handleElementToShow(5)">
+                <i nz-icon nzType="book"></i>
+                <span>Courses</span>
+            </li>
+            <li nz-menu-item style="margin-top:40%" (click)="logout()">
+                <i nz-icon nzType="logout"></i>
+                <span>Log out</span>
+            </li>
+        </ul>
+
+    </nz-sider>
+<nz-layout *ngIf="elementToShow==0">
+  <app-profile-update></app-profile-update>
+</nz-layout>
+
+     <nz-layout *ngIf="elementToShow==2">
+        <nz-content>
+            <app-table [adminContext]="adminContext" ></app-table>
+        </nz-content>
+    </nz-layout>
+
+  <nz-layout *ngIf="elementToShow==3">
+    <nz-content>
+      <app-instructors></app-instructors>
+    </nz-content>
+  </nz-layout>
+
+    <nz-layout *ngIf="elementToShow==4">
+    <nz-content>
+      <app-organisms></app-organisms>
+    </nz-content>
+  </nz-layout>
+  <nz-layout *ngIf="elementToShow==5">
+    <nz-content>
+      <app-planning></app-planning>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
+

@@ -32,6 +32,19 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the Course name">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="mainImage"
+              placeholder="Course image"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
         <nz-form-control nzErrorTip="Please enter the start date ">
           <nz-input-group>
             <input
@@ -93,6 +106,18 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
+        <nz-form-control nzErrorTip="Please enter the course capacity">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="placesAvailable"
+              placeholder="places Available "
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
         <nz-form-control nzErrorTip="Please enter the Course description">
           <nz-input-group>
             <textarea
@@ -101,6 +126,17 @@
               formControlName="description"
               placeholder=" description"></textarea>
           </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your nature!">
+          <nz-select
+            id="nature"
+            formControlName="instructedBy"
+            nzPlaceHolder="Instructor">
+            <nz-option *ngFor=" let i of instructorsAvailable" nzValue='{{i.id}}' nzLabel='{{i.user.firstName}} {{i.user.lastName}}'></nz-option>
+
+          </nz-select>
         </nz-form-control>
       </nz-form-item>
 

@@ -1,0 +1,250 @@
+<div class="bg">
+  <div class="container">
+    <div class="leftSide">
+      <div class="back">
+        <!-- <i
+          nz-icon
+          nzType="arrow-left"
+          nzTheme="outline"
+          class="arrowButton"
+        ></i> -->
+        
+      </div>
+      
+      <div class="principaleInfos" >
+        <div class="backText">
+          Your profile
+        </div>
+        <img nz-image
+
+          nzSrc="{{image}}"
+          alt=""
+          class="profileImage"
+          style="box-shadow: 0 0 3px rgba(24, 23, 23, 0.473)"
+        />
+
+
+        <div class="name">{{authUser.firstName}}  {{authUser.lastName}}</div>
+        <div class="job">{{authUser.role}}</div>
+      </div>
+
+      <div class="titlesList">
+        <div class="pageTitle">Profile</div>
+        <div class="pageTitle">Certificates</div>
+        <div class="pageTitle">History</div>
+      </div>
+    </div>
+    <div class="rightSide">
+      <div class="icons">
+        <div class="iCont">
+          <div class="iconContainer">
+            <i nz-icon nzType="edit" nzTheme="outline" class="editIcon"></i>
+          </div>
+          <div class="iconContainer">
+              <i nz-icon nzType="ellipsis" nzTheme="outline" class="editIcon"></i>
+            </div>
+
+        </div>
+        </div>
+      <div class="personalInfo">
+        <form
+          nz-form
+          [formGroup]="validateForm"
+          class="login-form"
+          (ngSubmit)="submitForm()"
+        >
+          <div class="login-form__header">
+            <h1 class="formTitle">Personal information</h1>
+          </div>
+          <div class="nameAndLastName">
+            <nz-form-item class="leftFieldInput">
+              <div class="fieldName">First Name</div>
+              <nz-form-control nzErrorTip="Please input your first name!">
+                <nz-input-group>
+                  <input
+                    type="text"
+                    nz-input
+                    formControlName="firstName"
+                    placeholder="First Name"
+                    class="inputText"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item class="rightFieldInput">
+              <div class="fieldName">Last Name</div>
+              <nz-form-control nzErrorTip="Please input your last name!">
+                <nz-input-group>
+                  <input
+                    type="text"
+                    nz-input
+                    formControlName="lastName"
+                    placeholder="Last Name"
+                    class="inputText"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-item class="fieldInput">
+            <div class="fieldName">Email</div>
+            <nz-form-control nzErrorTip="Please input your Email!">
+              <nz-input-group>
+                <input
+                  type="text"
+                  nz-input
+                  formControlName="email"
+                  placeholder="Email"
+                  class="inputText"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <div class="nameAndLastName">
+            <nz-form-item class="leftFieldInput">
+              <div class="fieldName">Phone Number</div>
+              <nz-form-control nzErrorTip="Please input your birth date!">
+                <nz-input-group>
+                  <input nz-input type="text" formControlName="phoneNumber" placeholder="00000000"/>
+                 </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+
+          </div>
+          <div nz-row class="login-form-margin"></div>
+          <br />
+          <div class="updateButtonContainer">
+            <button
+            nz-button
+            class="updateButton"
+            [nzType]="'primary'"
+          >
+            {{ textl }}
+          </button>
+
+          </div>
+
+            <div *ngIf="successMessage">
+            <nz-alert
+              nzType="success"
+              nzMessage="Profile successfully updated"
+            ></nz-alert>
+          </div>
+          <div *ngIf="errorMessage">
+            <div *ngFor="let e of errorMessage">
+              <nz-alert nzType="error" nzMessage="{{ e }}"></nz-alert>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="securityInfo">
+        <form
+          nz-form
+          [formGroup]="validateForm"
+          class="login-form"
+          (ngSubmit)="submitFormPassword()"
+        >
+          <div class="login-form__header">
+            <h1 class="formTitle">Security information</h1>
+          </div>
+          <div class="nameAndLastName">
+            <nz-form-item class="leftFieldInput">
+              <div class="fieldName">Phone Number</div>
+              <nz-form-control nzErrorTip="Please input your phone number!">
+                <nz-input-group>
+                  <input
+                    type="text"
+                    nz-input
+                    formControlName="firstName"
+                    placeholder="+216 94290600"
+                    class="inputText"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item class="rightFieldInput">
+              <div class="fieldName">Vérification Email</div>
+              <nz-form-control nzErrorTip="Please input your verification code!">
+                <nz-input-group>
+                  <input
+                    type="text"
+                    nz-input
+                    formControlName="lastName"
+                    placeholder="Email"
+                    class="inputText"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-row class="login-form-margin"></div>
+          <br />
+          <button
+            nz-button
+            class="login-form-button login-form-margin"
+            [nzType]="'primary'"
+          >
+            {{ text2 }}
+          </button>
+          <br />
+          <div *ngIf="successMessage">
+            <nz-alert
+              nzType="success"
+              nzMessage="Sign Up successfully completed"
+            ></nz-alert>
+          </div>
+          <div *ngIf="errorMessage">
+            <div *ngFor="let e of errorMessage">
+              <nz-alert nzType="error" nzMessage="{{ e }}"></nz-alert>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="authUser.instructor && authUser.instructor.courses.length>0">
+    <div class="titleContainer">
+      Course To Teach
+
+  </div>
+    
+    <div class="card-container" >
+      <div *ngFor="let course of authUser.instructor.courses"> 
+      <app-enrolled-courses [description]="course.preview"
+                            [endDate]="course.endDate"
+                            [startDate]="course.startDate"
+                            [name]="course.name"
+                            [image]="course.mainImage"
+                            [id]="course.id"
+      ></app-enrolled-courses>
+    </div>
+  </div>
+
+  </div>
+
+  <div *ngIf="adminContext">
+    <div class="titleContainer" *ngIf="authUser.enrolled.length>0">
+      Enrolled courses
+ 
+   </div>
+    <div *ngIf="authUser.enrolled.length>0" class="card-container">
+     
+      <div *ngFor="let enroll of authUser.enrolled">
+      <app-enrolled-courses [description]=" 'inscription state : \t' +enroll.state"
+                            [endDate]="enroll.course.endDate"
+                            [startDate]="enroll.course.startDate"
+                            [name]="enroll.course.name"
+                            [image]="enroll.course.mainImage"
+                            [id]="enroll.course.id"
+                            enrollContext="true"
+                            inscriptionText="désinscrire"
+                            [enrollmentId]="enroll.id"
+
+      ></app-enrolled-courses>
+      </div>
+
+    </div>
+  </div>
+</div>

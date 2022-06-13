@@ -1,0 +1,169 @@
+<div class="content" *ngIf="!showContainer">
+  <div class="firstContainer">
+    <div class="logoContainer">
+      <img
+        nz-image
+        width="200px"
+        height="100px"
+        nzSrc="/assets/Images/medsirat.png"
+        alt=""
+        class="logo"
+      />
+    </div>
+    <div class="posts">
+      <div class="infos">
+        <h1>Formartion Title</h1>
+        <h4>
+          Lorem ipsum dolor, sit amet consectetur aaaaaaaaaaaaaaaaaaaa enedekv
+          dlkff,ezlfkfelkfnek nlkelknfzlknelkffnzl nlknzzlkdnlkndlzkndlkn
+          lknalksdnazlkdnzlkdnlkn lk,asdk,lkdzlknk lknlakzznalkndlknl dipisicing
+          elit. Assumenda harum nisi, a blanditiis optio consequuntur libero
+          commodi dolor accusamus ullam dicta tenetur laborum ab nemo eius
+          veniam, ex itaque odit?
+        </h4>
+      </div>
+      <div class="AccDenyButton" style="text-align: center">
+        <br />
+        <a
+          href="javascript:void(0)"
+          (click)="changeShowContainer(true)"
+          class="accept"
+          >ACCEPT <span class="fa fa-check"></span
+        ></a>
+        <a
+          href="javascript:void(0)"
+          (click)="changeShowContainer(false)"
+          class="deny"
+        >
+          DENY <span class="fa fa-close"></span
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content" *ngIf="showContainer">
+  <div class="secondContainer">
+    <div class="logoContainer">
+      <img
+        nz-image
+        width="200px"
+        height="100px"
+        nzSrc="/assets/Images/medsirat.png"
+        alt=""
+        class="logo"
+      />
+    </div>
+    <div class="secondInfos">
+
+    <div class="login-form__header">
+      <h1>Enroll last step</h1>
+      Please fill the form to complete enrollment
+    </div>
+    <div>
+      you can add other members to join you on this course or just submit the
+      enroll
+    </div>
+    <div class="secondAccDenyButton">
+      <a
+          href="javascript:void(0)"
+          (click)="changeShowNext(!showNext)"
+          class="accept"
+          >{{text2}}</a>
+          <a
+          href="javascript:void(0)"
+          (click)="enrollOne()"
+          class="accept"
+          >ENROLL</a>
+      <!-- <app-button
+        [text]="text2"
+        (click)="changeShowNext(!showNext)"
+      ></app-button>
+      <app-button
+        *ngIf="!showNext"
+        text="ENROLL"
+        (click)="enrollOne()"
+      ></app-button> -->
+    </div>
+
+    <form
+      *ngIf="showNext"
+      nz-form
+      [formGroup]="validateForm"
+      class="login-form"
+      (ngSubmit)="submitForm()"
+    >
+      <nz-form-item *ngFor="let control of listOfControl; let i = index">
+        <nz-form-label
+          [nzXs]="24"
+          [nzSm]="4"
+          *ngIf="i === 0"
+          [nzFor]="control.controlInstance"
+        >
+          Passengers
+        </nz-form-label>
+        <nz-form-control nzErrorTip="Please input your complete name!">
+          <nz-input-group>
+            <input
+              type="text"
+              nz-input
+              formControlName="lastName"
+              placeholder="last name"
+              [attr.id]="control.id"
+              [formControlName]="control.controlInstance"
+            />
+            <input
+              type="text"
+              nz-input
+              formControlName="email"
+              placeholder="email"
+              [attr.id]="control.id"
+              [formControlName]="control.controlEmail"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control
+          [nzXs]="{ span: 24, offset: 0 }"
+          [nzSm]="{ span: 20, offset: 4 }"
+        >
+          <button
+            nz-button
+            nzType="dashed"
+            class="add-button"
+            (click)="addField($event)"
+          >
+            <i nz-icon nzType="plus"></i>
+            Add field
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div nz-row class="login-form-margin"></div>
+      <br />
+      <div class="submitButtonContainer">
+        <button
+        nz-button
+        class="submitButton"
+        [nzType]="'primary'"
+      >
+        {{ textl }}
+      </button>
+
+      </div>
+      <!-- <app-button [text]="textl"></app-button> -->
+      <br />
+      <div *ngIf="successMessage">
+        <nz-alert
+          nzType="success"
+          nzMessage="Sign Up successfully completed"
+        ></nz-alert>
+      </div>
+      <div *ngIf="errorMessage">
+        <nz-alert nzType="error" nzMessage="{{ errorMessage }}"></nz-alert>
+      </div>
+    </form>
+  </div>
+
+  </div>
+</div>

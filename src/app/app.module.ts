@@ -23,6 +23,18 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SignupUserComponent } from './pages/signup-user/signup-user.component';
 import { SignupOrganismComponent } from './pages/signup-organism/signup-organism.component';
 import { CardComponent } from './shared/card/card.component';
+import { SignupInstructorComponent } from './pages/signup-instructor/signup-instructor.component';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatChipsModule} from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { DashboardClientModule } from './pages/dashboard-client/dashboard-client.module';
+
+import { AdminModule } from './admin/admin.module';
+import {PlanningModule} from "./planning/planning.module";
+import { PresSignupComponent } from './components/pres-signup/pres-signup.component';
 
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
@@ -33,16 +45,19 @@ FullCalendarModule.registerPlugins([
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    ButtonComponent,
-    SignupUserComponent,
-    SignupOrganismComponent,
-    PlanningComponent,
-    FormationComponent,
-    CardComponent
-  ],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+
+        SignupUserComponent,
+        SignupOrganismComponent,
+SignupInstructorComponent,
+        FormationComponent,
+        PresSignupComponent,
+
+
+    ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -57,6 +72,15 @@ registerLocaleData(en);
     FullCalendarModule,
     BrowserModule,
     HttpClientModule,
+    MatSliderModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    NzDatePickerModule,
+    DashboardClientModule,
+    AdminModule,
+    PlanningModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

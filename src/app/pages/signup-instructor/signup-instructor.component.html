@@ -1,0 +1,124 @@
+<div class="bg">
+    <div class="container">
+        <img nz-image width="200px" height="100px" nzSrc="/assets/Images/medsirat.png" alt="" class="logo" />
+        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+            <div class="login-form__header">
+                <h1>Signup as an instructor</h1>
+            </div>
+          <div *ngIf="isUserSubscription">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your first name!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="firstName" placeholder="First name" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your last name!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="lastName" placeholder="last name" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your Email!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="email" placeholder="Email" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your phone number!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="phoneNumber" placeholder="Telephone" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your CIN!">
+                <nz-input-group>
+                  <input type="text" nz-input formControlName="cin" placeholder="CIN" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-input-group>
+                  <input type="password" nz-input formControlName="password" placeholder="password" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Password does not match!">
+                <nz-input-group>
+                  <input type="password" nz-input formControlName="cpassword" placeholder="confirm password" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+<div *ngIf="!isUserSubscription">
+            <nz-form-item >
+                <nz-form-control nzErrorTip="Please add a link to your CV!">
+                    <nz-input-group>
+                        <label>Please add a link to your CV</label>
+
+                        <input  type="text" nz-input formControlName="cv" id="test" name="test"  />
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please a link to your professional image!">
+      <nz-input-group>
+        <input type="text" nz-input formControlName="professionalImage" placeholder="Professional Image" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Resume!">
+      <nz-input-group>
+        <textarea type="text" nz-input formControlName="resume" placeholder="Few words about you , your experience..." ></textarea>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+
+
+
+
+  <label>Specify your disponibility</label>
+            <nz-form-item class="availibility">
+                <nz-form-control nzErrorTip="Please specify your availibility!">
+                    <nz-input-group>
+                        <nz-range-picker formControlName="dates" [nzRenderExtraFooter]="plainFooter"></nz-range-picker>
+
+                    </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+
+
+
+            <div nz-row class="login-form-margin"></div>
+          <app-button [text]="textl"></app-button>
+</div>
+            <br />
+          <app-button *ngIf="isUserSubscription" type="button"  (click)="showUserSubscription(false)" text="NEXT"></app-button>
+          <br>
+          <app-button *ngIf="!isUserSubscription" type="button"  (click)="showUserSubscription(true)" text="GO BACK"></app-button>
+
+
+            <br />
+            <div *ngIf="successMessage">
+                <nz-alert nzType="success" nzMessage="Sign Up successfully completed"></nz-alert>
+            </div>
+            <div *ngIf="errorMessage">
+                <div *ngFor="let e of errorMessage">
+                    <nz-alert nzType="error" nzMessage="{{ e }}"></nz-alert>
+                </div>
+            </div>
+            <div class="login-form_bottom">
+                already have an account ?
+                <a routerLink="/login">log in here</a>
+            </div>
+        </form>
+    </div>
+</div>
