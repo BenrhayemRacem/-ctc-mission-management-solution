@@ -17,8 +17,12 @@ export class SignupUserComponent implements OnInit {
 
   submitForm(): void {
     if (this.validateForm.valid) {
+      const {firstName,lastName,email,phoneNumber,cin,password,cpassword} = this.validateForm.value
+      const user = {
+      firstName,lastName,email,phoneNumber,cin,password,repeat_password:cpassword
+      }
       console.log('submit', this.validateForm.value);
-      this.http.post('http://localhost:3000/auth/signup',{...this.validateForm.value}).subscribe(
+      this.http.post('http://localhost:3000/auth/signup',user).subscribe(
         responseData=>{
           console.log(responseData);
           this.successMessage=true;
