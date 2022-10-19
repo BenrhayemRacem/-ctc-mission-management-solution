@@ -11,7 +11,7 @@ Some of the features in this project are:
  
 The web plateform handle 4 different users' roles :
   - an individual participant
-  - an organisation participant (for example: ensuring a training for its employees)
+  - an organisation participant (for example: a company ensuring a training for its employees)
   - Instructors (instructor account is activated after admin approval)
   - Admin
  
